@@ -31,6 +31,7 @@ function easy(){
         alert("Click on restart before changing the Level!")
     });
     level.innerText = "Easy";
+    secTitle.innerText = 'Begin by moving your mouse over the "S"'
 
     function startgame(){
         start.addEventListener('mouseover', mousestart);
@@ -39,10 +40,11 @@ function easy(){
     function mousestart(){
         start.removeEventListener('mouseover', mousestart);
         window.addEventListener('mousemove', mouseFollower);
+        secTitle.innerText = "Don't hit the borders!";
+        secTitle.style.color = "black";
     }
 
     function mouseFollower(event){
-        secTitle.innerText = "Don't hit the borders!";
         let startposy = event.pageY
         let startposx = event.clientX
         if (( startposy < boundary1pos.bottom && startposx < boundary1pos.right )
@@ -69,14 +71,16 @@ function easy(){
     function lost(){
         window.removeEventListener('mousemove', mouseFollower);
         counter -= 10;
-        secTitle.innerText = "You Lost!";
+        secTitle.innerText = "You Lost! Click on the S to try again";
+        secTitle.style.color = "red";
         game.classList.add("youlose");
         retry();
     }
 
     function win(){
         window.removeEventListener('mousemove', mouseFollower);
-        secTitle.innerText = "You Won!";
+        secTitle.innerText = "You Won! Click on the S to play again";
+        secTitle.style.color = "green";
         counter += 5;
         retry();
     }
@@ -94,8 +98,11 @@ function hard() {
         alert("Click on restart before changing the Level!")
     });
     level.innerText = "HARD";
+    secTitle.innerText = 'Begin by click on the middle of the "S"';
 
     function startgame(){
+        secTitle.innerText = "Don't hit the borders!";
+        secTitle.style.color = "black";
         start.removeEventListener('click', startgame);
         game.classList.remove("youlose");
         start.addEventListener('mousemove', mouseFollower);
@@ -124,7 +131,8 @@ function hard() {
 
     function lost(){
         counter -= 10;
-        secTitle.innerText = "You Lost!";
+        secTitle.innerText = "You Lost! Click on the S to try again";
+        secTitle.style.color = "red";
         start.removeEventListener('mousemove', mouseFollower);
         start.style.left = 0 + 'px';
         start.style.top = startinitpos.top - boundary1pos.top + 'px';
@@ -141,7 +149,8 @@ function hard() {
     }
 
     function win(){
-        secTitle.innerText = "You Won!";
+        secTitle.innerText = "You Won! Click on the S to play again";
+        secTitle.style.color = "green";
         counter += 5;
         start.style.left = 0 + 'px';
         start.style.top = startinitpos.top - boundary1pos.top + 'px';
