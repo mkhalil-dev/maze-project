@@ -5,6 +5,7 @@ const boundary3pos = document.getElementById("boundary3").getBoundingClientRect(
 const boundary4pos = document.getElementById("boundary4").getBoundingClientRect()
 const boundary5pos = document.getElementById("boundary5").getBoundingClientRect()
 const startinitpostop = start.getBoundingClientRect().top
+const game = document.getElementById("game")
 const endbox = document.getElementById("end").getBoundingClientRect()
 
 console.log(boundary1.getBoundingClientRect().bottom)
@@ -45,13 +46,13 @@ function lost(){
     start.style.left = 0 + 'px'
     start.style.top = startinitpostop - boundary1pos.top + 'px'
     alert("Lost!");
-    document.body.style.backgroundColor = "red";
+    game.style.backgroundColor = "red";
     retry()
 }
 
 function retry(){
     start.addEventListener(('mouseover'), function(){
-        document.body.style.backgroundColor = "white";
+        game.style.backgroundColor = "white";
     })
     start.addEventListener('click', starttask)
 }
