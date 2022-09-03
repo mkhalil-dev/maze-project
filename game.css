@@ -49,14 +49,25 @@ div.boundary {
 	border: 1px solid black;
 }
 
-div.boundary.example {
-	margin: auto;
-	width: 100px;
+div.results {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	width: 40%;
 	height: 25px;
+	margin: auto;
+	align-items: center;
 }
 
 div.youlose {
 	background-color: #ff8888;
+}
+
+.centerrestart{
+	margin-top: 10px;
+}
+.centeritems{
+	text-align: center;
 }
 
 /*
