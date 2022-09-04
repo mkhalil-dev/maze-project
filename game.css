@@ -76,6 +76,10 @@ div.youlose {
 	text-align: center;
 }
 
+#user{
+	padding: 2px 10px;
+}
+
 /*
 Hack hack hack; these are CSS "sibling selectors" for selecting
 neighboring elements.  Necessary to avoid giving ids to the boundary divs

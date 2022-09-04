@@ -9,6 +9,7 @@ const secTitle = document.getElementById("status");
 const startinitpos = start.getBoundingClientRect();
 const game = document.getElementById("game");
 const endbox = document.getElementById("end").getBoundingClientRect();
+const user = prompt("What is your Username?");
 
 var counter = 0;
 const ldiv = document.getElementsByClassName("example")[0];
@@ -20,27 +21,23 @@ secTitle.innerHTML = "Begin by Selecting your level."
 
 const hardbtn = document.getElementById("hard");
 const easybtn = document.getElementById("easy");
-const restartbtn = document.getElementById("restart");
-const level = document.getElementById("level");
-const score = document.getElementById("score");
 
 
 hardbtn.addEventListener('click', hard);
 easybtn.addEventListener('click', easy);
-restartbtn.addEventListener('click', restart);
 
 function easy(){
     hardbtn.removeEventListener('click', hard);
     easybtn.removeEventListener('click', easy);
-    hardbtn.addEventListener('click', function(){
-        alert("Click on restart before changing the Level!")
-    });
-    easybtn.addEventListener('click', function(){
-        alert("Click on restart before changing the Level!")
-    });
+    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+    let userbox = document.getElementById("user");
+    let restartbtn = document.getElementById("restart");
+    let level = document.getElementById("level");
+    let score = document.getElementById("score");
+    restartbtn.addEventListener('click', restart);
+    userbox.innerHTML = user;
     level.innerText = "Easy";
     secTitle.innerText = 'Begin by moving your mouse over the "S"'
-
     function startgame(){
         start.addEventListener('mouseover', mousestart);
     };
@@ -99,12 +96,13 @@ function easy(){
 function hard() {
     hardbtn.removeEventListener('click', hard);
     easybtn.removeEventListener('click', easy);
-    hardbtn.addEventListener('click', function(){
-        alert("Click on restart before changing the Level!")
-    });
-    easybtn.addEventListener('click', function(){
-        alert("Click on restart before changing the Level!")
-    });
+    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+    let userbox = document.getElementById("user");
+    let restartbtn = document.getElementById("restart");
+    let level = document.getElementById("level");
+    let score = document.getElementById("score");
+    restartbtn.addEventListener('click', restart);
+    userbox.innerHTML = user;
     level.innerText = "HARD";
     secTitle.innerText = 'Begin by click on the middle of the "S"';
 
