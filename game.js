@@ -12,7 +12,7 @@ const endbox = document.getElementById("end").getBoundingClientRect();
 const user = prompt("What is your Username?");
 var timercheck = true;
 
-game.insertAdjacentHTML("afterend", '<div style="margin-top: 10px;"><center>Timer: <span id="timer" class="timerbg">N/A</span></center></div>')
+game.insertAdjacentHTML("afterend", '<div style="margin-top: 10px;"><center>Timer <span id="timer" class="timerbg">N/A</span></center></div>')
 
 var timerbox = document.getElementById("timer")
 var counter = 0;
