@@ -16,6 +16,7 @@ const ldiv = document.getElementsByClassName("example")[0];
 ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div class="centerrestart"><button id="easy">Easy</button></div><div class="centerrestart"><button id="restart">Restart</button></div><div class="centerrestart"><button id="hard">Hard</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
 ldiv.classList.add("results")
 ldiv.classList.remove("boundary")
+secTitle.innerHTML = "Begin by Selecting your level."
 
 const hardbtn = document.getElementById("hard");
 const easybtn = document.getElementById("easy");
