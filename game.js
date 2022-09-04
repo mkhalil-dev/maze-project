@@ -10,11 +10,15 @@ const startinitpos = start.getBoundingClientRect();
 const game = document.getElementById("game");
 const endbox = document.getElementById("end").getBoundingClientRect();
 const user = prompt("What is your Username?");
+var timercheck = true;
 
+game.insertAdjacentHTML("afterend", '<div style="margin-top: 10px;"><center>Timer: <span id="timer" class="timerbg">N/A</span></center></div>')
+
+var timerbox = document.getElementById("timer")
 var counter = 0;
 const ldiv = document.getElementsByClassName("example")[0];
 
-ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div class="centerrestart"><button id="easy">Easy</button></div><div class="centerrestart"><button id="restart">Restart</button></div><div class="centerrestart"><button id="hard">Hard</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div class="centerrestart"><button id="easy">Easy</button></div><div class="centerrestart"><button id="restart">Restart</button></div><div class="centerrestart"><button id="hard">Hard</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div><br>'
 ldiv.classList.add("results")
 ldiv.classList.remove("boundary")
 secTitle.innerHTML = "Begin by Selecting your level."
@@ -27,9 +31,13 @@ hardbtn.addEventListener('click', hard);
 easybtn.addEventListener('click', easy);
 
 function easy(){
+    let gamestatus = false;
+    if(timercheck){
+        timerbox.innerText = "60";
+    }
     hardbtn.removeEventListener('click', hard);
     easybtn.removeEventListener('click', easy);
-    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div><br>'
     let userbox = document.getElementById("user");
     let restartbtn = document.getElementById("restart");
     let level = document.getElementById("level");
@@ -38,15 +46,21 @@ function easy(){
     userbox.innerHTML = user;
     level.innerText = "Easy";
     secTitle.innerText = 'Begin by moving your mouse over the "S"'
+
     function startgame(){
         start.addEventListener('mouseover', mousestart);
     };
 
+
     function mousestart(){
+        gamestatus = false;
         start.removeEventListener('mouseover', mousestart);
         window.addEventListener('mousemove', mouseFollower);
         secTitle.innerText = "Don't hit the borders!";
         secTitle.style.color = "black";
+        if(timercheck){
+            timer()
+        }
     }
 
     function mouseFollower(event){
@@ -79,6 +93,7 @@ function easy(){
         secTitle.innerText = "You Lost! Click on the S to try again";
         secTitle.style.color = "red";
         game.classList.add("youlose");
+        gamestatus = true;
         retry();
     }
 
@@ -87,7 +102,28 @@ function easy(){
         secTitle.innerText = "You Won! Click on the S to play again";
         secTitle.style.color = "green";
         counter += 5;
+        gamestatus = true;
         retry();
+    }
+
+    function timer(){
+        var setdate = new Date().getTime();
+        var countDownDate = setdate + 61000
+        var seconds = 60;
+        var myfunc = setInterval(function() {
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+            seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+            timerbox.innerText = seconds;
+            if(gamestatus){
+                timerbox.innerText = "60";
+                clearInterval(myfunc);
+            }
+            if (timeleft <= 0) {
+                clearInterval(myfunc);
+                lost()
+            }
+        }, 1000);
     }
      
     startgame();
@@ -96,7 +132,7 @@ function easy(){
 function hard() {
     hardbtn.removeEventListener('click', hard);
     easybtn.removeEventListener('click', easy);
-    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+    ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div><br>'
     let userbox = document.getElementById("user");
     let restartbtn = document.getElementById("restart");
     let level = document.getElementById("level");
