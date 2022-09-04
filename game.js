@@ -1,4 +1,3 @@
-
 const start = document.getElementById('start');
 const boundary1pos = document.getElementById("boundary1").getBoundingClientRect();
 const boundary2pos = document.getElementById("boundary2").getBoundingClientRect();
@@ -10,12 +9,20 @@ const secTitle = document.getElementById("status");
 const startinitpos = start.getBoundingClientRect();
 const game = document.getElementById("game");
 const endbox = document.getElementById("end").getBoundingClientRect();
-const score = document.getElementById("score");
-const level = document.getElementById("level");
-const restartbtn = document.getElementById("restart");
+
+var counter = 0;
+const ldiv = document.getElementsByClassName("example")[0];
+
+ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div class="centerrestart"><button id="easy">Easy</button></div><div class="centerrestart"><button id="restart">Restart</button></div><div class="centerrestart"><button id="hard">Hard</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div>'
+ldiv.classList.add("results")
+ldiv.classList.remove("boundary")
+
 const hardbtn = document.getElementById("hard");
 const easybtn = document.getElementById("easy");
-var counter = 0;
+const restartbtn = document.getElementById("restart");
+const level = document.getElementById("level");
+const score = document.getElementById("score");
+
 
 hardbtn.addEventListener('click', hard);
 easybtn.addEventListener('click', easy);

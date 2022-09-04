@@ -59,6 +59,12 @@ div.results {
 	align-items: center;
 }
 
+div.boundary.example {
+	margin: auto;
+	width: 100px;
+	height: 25px;
+}
+
 div.youlose {
 	background-color: #ff8888;
 }
