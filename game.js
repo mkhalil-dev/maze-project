@@ -53,11 +53,11 @@ function easy(){
 
 
     function mousestart(){
-        gamestatus = false;
         start.removeEventListener('mouseover', mousestart);
         window.addEventListener('mousemove', mouseFollower);
         secTitle.innerText = "Don't hit the borders!";
         secTitle.style.color = "black";
+        gamestatus = false;
         if(timercheck){
             timer()
         }
@@ -130,6 +130,7 @@ function easy(){
 };
 
 function hard() {
+    let gamestatus = false;
     hardbtn.removeEventListener('click', hard);
     easybtn.removeEventListener('click', easy);
     ldiv.innerHTML = '<div>Score<div id="score" class="boundary centeritems">0</div></div><div><center>User</center><div id="user" class="boundary centeritems">N/A</div></div><div class="centerrestart"><button id="restart">Restart</button></div><div>Level Difficulty<div id="level" class="boundary centeritems">N/A</div></div><br>'
@@ -148,6 +149,10 @@ function hard() {
         start.removeEventListener('click', startgame);
         game.classList.remove("youlose");
         start.addEventListener('mousemove', mouseFollower);
+        gamestatus = false;
+        if(timercheck){
+            timer()
+        }
     };
 
     function mouseFollower(e) {
@@ -183,6 +188,7 @@ function hard() {
     }
 
     function retry(){
+        gamestatus = true;
         score.innerText = counter;
         start.addEventListener(('mouseover'), function(){
             game.classList.remove("youlose");
@@ -198,6 +204,26 @@ function hard() {
         start.style.top = startinitpos.top - boundary1pos.top + 'px';
         start.removeEventListener('mousemove', mouseFollower);
         retry()
+    }
+
+    function timer(){
+        var setdate = new Date().getTime();
+        var countDownDate = setdate + 61000
+        var seconds = 60;
+        var myfunc = setInterval(function() {
+            var now = new Date().getTime();
+            var timeleft = countDownDate - now;
+            seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+            timerbox.innerText = seconds;
+            if(gamestatus){
+                timerbox.innerText = "60";
+                clearInterval(myfunc);
+            }
+            if (timeleft <= 0) {
+                clearInterval(myfunc);
+                lost()
+            }
+        }, 1000);
     }
 
     start.addEventListener('click', startgame);
