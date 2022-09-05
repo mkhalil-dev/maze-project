@@ -1,5 +1,3 @@
-
-
 const start = document.getElementById('start');
 const boundary1pos = document.getElementById("boundary1").getBoundingClientRect();
 const boundary2pos = document.getElementById("boundary2").getBoundingClientRect();
