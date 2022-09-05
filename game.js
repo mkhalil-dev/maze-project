@@ -1,16 +1,19 @@
+
+
 const start = document.getElementById('start');
 const boundary1pos = document.getElementById("boundary1").getBoundingClientRect();
 const boundary2pos = document.getElementById("boundary2").getBoundingClientRect();
 const boundary3pos = document.getElementById("boundary3").getBoundingClientRect();
 const boundary4pos = document.getElementById("boundary4").getBoundingClientRect();
 const boundary5pos = document.getElementById("boundary5").getBoundingClientRect();
-const mainTitle = document.querySelector("h1");
 const secTitle = document.getElementById("status");
 const startinitpos = start.getBoundingClientRect();
 const game = document.getElementById("game");
 const endbox = document.getElementById("end").getBoundingClientRect();
 const user = prompt("What is your Username?");
 var timercheck = true;
+
+let data = "Learning how to write in a file."
 
 game.insertAdjacentHTML("afterend", '<div style="margin-top: 10px;"><center>Timer <span id="timer" class="timerbg">N/A</span></center></div>')
 
@@ -29,6 +32,8 @@ const easybtn = document.getElementById("easy");
 document.getElementById("timertoggle").addEventListener('click', timerswitch);
 hardbtn.addEventListener('click', hard);
 easybtn.addEventListener('click', easy);
+
+
 
 function timerswitch(){
     if (timercheck){
@@ -53,6 +58,19 @@ function easy(){
     let restartbtn = document.getElementById("restart");
     let level = document.getElementById("level");
     let score = document.getElementById("score");
+    score.innerHTML = "0";
+    if (typeof(Storage) !== "undefined") {
+        if (localStorage.getItem(user)!= "[object HTMLDivElement]"){
+            score.innerHTML = localStorage.getItem(user);
+            counter = localStorage.getItem(user);
+        }
+        else {
+            score.innerHTML = "0";
+      }
+    }
+    if(!score.innerHTML){
+        score.innerHTML = "0";
+    }
     restartbtn.addEventListener('click', restart);
     userbox.innerHTML = user;
     level.innerText = "Easy";
@@ -91,7 +109,9 @@ function easy(){
     }
 
     function retry(){
+        localStorage.removeItem(user, score.innerText);
         score.innerText = counter;
+        localStorage.setItem(user, counter);
         start.addEventListener(('mouseover'), function(){
             game.classList.remove("youlose");
         })
@@ -152,6 +172,20 @@ function hard() {
     let restartbtn = document.getElementById("restart");
     let level = document.getElementById("level");
     let score = document.getElementById("score");
+    score.innerHTML = "0";
+    if (typeof(Storage) !== "undefined") {
+        console.log(localStorage.getItem(user))
+        if (localStorage.getItem(user)!= "[object HTMLDivElement]"){
+            score.innerHTML = localStorage.getItem(user);
+            counter = localStorage.getItem(user);
+        }
+        else {
+            score.innerHTML = "0";
+        }
+    }
+    if(!score.innerHTML){
+        score.innerHTML = "0";
+    }
     restartbtn.addEventListener('click', restart);
     userbox.innerHTML = user;
     level.innerText = "HARD";
@@ -203,7 +237,9 @@ function hard() {
 
     function retry(){
         gamestatus = true;
+        localStorage.removeItem(user, score.innerText);
         score.innerText = counter;
+        localStorage.setItem(user, counter);
         start.addEventListener(('mouseover'), function(){
             game.classList.remove("youlose");
         })
@@ -246,3 +282,4 @@ function hard() {
 function restart(){
     document.location.reload();
 }
+
